@@ -4,6 +4,8 @@ import tokenize
 from flake8_meiqia import core
 
 
+_TODO_RE = re.compile(r'\b(TODO|FIXME|XXX)(\()?')
+
 @core.flake8ext
 def meiqia_todo_format(physical_line, tokens):
     """Checks for 'TODO()' in comments.
@@ -15,14 +17,13 @@ def meiqia_todo_format(physical_line, tokens):
     MQ101: # @ToDo
     """
 
-    todo_re = re.compile(r'\b(TODO|FIXME|XXX)(\()?')
     for token_type, text, start_index, _, _ in tokens:
         if token_type == tokenize.COMMENT:
             pos = text.find('@ToDo')
             if pos >= 0:
                 return pos + start_index[1], "MQ101: Use TODO(NAME)"
 
-            m = todo_re.search(text)
+            m = _TODO_RE.search(text)
             if not m:
                 continue
 

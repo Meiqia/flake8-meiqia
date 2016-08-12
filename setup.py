@@ -15,18 +15,11 @@ def get_long_description():
         return f.read()
 
 
-requires = [
-    'pep8',
-    'pyflakes',
-    'flake8',
-]
-
 setup(
     name='flake8-meiqia',
     version=get_version(),
     author='Meiqia Developers',
     author_email='dev@meiqia.com',
-    summary='Python style guideline in Meiqia',
     description='Python style guideline in Meiqia',
     long_description=get_long_description(),
     license='Apache License 2.0',
@@ -49,7 +42,9 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Topic :: Software Development :: Quality Assurance',
     ],
-    install_requires=requires,
+    install_requires=[
+        'flake8'
+    ],
     entry_points={
         'flake8.extension': [
             'MQ101 = flake8_meiqia.checks.comments:meiqia_todo_format',
