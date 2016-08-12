@@ -33,6 +33,7 @@ setup(
     url='https://github.com/Meiqia/flake8-meiqia',
     packages=['flake8_meiqia'],
     classifier=[
+        'Framework :: Flake8',
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
