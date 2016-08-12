@@ -29,4 +29,4 @@ def meiqia_todo_format(physical_line, tokens):
             pos = m.pos
             groups = m.groups()
             if not groups[-1]:
-                return pos + start_index[1], "MQ101: Use TODO(NAME)"
+                return pos + start_index[1], "MQ101: Use %s(NAME)" % groups[0]
