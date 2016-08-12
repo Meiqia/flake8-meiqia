@@ -27,6 +27,7 @@ setup(
     author='Meiqia Developers',
     author_email='dev@meiqia.com',
     summary='Python style guideline in Meiqia',
+    description='Python style guideline in Meiqia',
     long_description=get_long_description(),
     license='Apache License 2.0',
     url='https://github.com/Meiqia/flake8-meiqia',
