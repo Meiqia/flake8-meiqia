@@ -48,6 +48,7 @@ setup(
     entry_points={
         'flake8.extension': [
             'MQ101 = flake8_meiqia.checks.comments:meiqia_todo_format',
+            'MQ201 = flake8_meiqia.checks.excepts:meiqia_except_format',
             'MQ903 = flake8_meiqia.checks.other:meiqia_no_cr',
         ]
     },
