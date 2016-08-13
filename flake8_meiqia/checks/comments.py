@@ -4,7 +4,11 @@ import tokenize
 from flake8_meiqia import core
 
 
-_TODO_RE = re.compile(r'\b(TODO|FIXME|XXX)(\()?')
+_TODO_RE = re.compile(r'''
+    (?P<leading>[@\W])?
+    (?P<todo>TODO|ToDo|FIXME|FixMe|XXX)
+    (?P<trailing>\()?''', re.VERBOSE)
+
 
 @core.flake8ext
 def meiqia_todo_format(physical_line, tokens):
@@ -19,15 +23,17 @@ def meiqia_todo_format(physical_line, tokens):
 
     for token_type, text, start_index, _, _ in tokens:
         if token_type == tokenize.COMMENT:
-            pos = text.find('@ToDo')
-            if pos >= 0:
-                return pos + start_index[1], "MQ101: Use TODO(NAME)"
-
             m = _TODO_RE.search(text)
             if not m:
                 continue
 
-            pos = m.pos
-            groups = m.groups()
-            if not groups[-1]:
-                return pos + start_index[1], "MQ101: Use %s(NAME)" % groups[0]
+            groups = m.groupdict()
+            todo_name = groups['todo'].upper()
+            if (groups['leading'] == '@' or groups['todo'] != todo_name or
+                    groups['trailing'] != '('):
+                if groups['leading'] == '@':
+                    err_pos = m.start('leading') + start_index[1]
+                else:
+                    err_pos = m.start('todo') + start_index[1]
+
+                return err_pos, "MQ101: Use %s(NAME)" % todo_name
