@@ -24,7 +24,10 @@ setup(
     long_description=get_long_description(),
     license='Apache License 2.0',
     url='https://github.com/Meiqia/flake8-meiqia',
-    packages=['flake8_meiqia'],
+    packages=[
+        'flake8_meiqia',
+        'flake8_meiqia.checks',
+    ],
     classifier=[
         'Framework :: Flake8',
         'Development Status :: 4 - Beta',
