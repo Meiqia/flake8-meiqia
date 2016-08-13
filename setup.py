@@ -15,6 +15,13 @@ def get_long_description():
         return f.read()
 
 
+flake8_ext = [
+    'MQ101 = flake8_meiqia.checks.comments:meiqia_todo_format',
+    'MQ201 = flake8_meiqia.checks.excepts:meiqia_except_format',
+    'MQ301 = flake8_meiqia.checks.code:meiqia_no_mutable_default_args',
+    'MQ903 = flake8_meiqia.checks.other:meiqia_no_cr',
+]
+
 setup(
     name='flake8-meiqia',
     version=get_version(),
@@ -29,9 +36,9 @@ setup(
         'flake8_meiqia.checks',
     ],
     classifier=[
-        'Framework :: Flake8',
         'Development Status :: 4 - Beta',
         'Environment :: Console',
+        'Framework :: Flake8',
         'Intended Audience :: Developers',
         'Intended Audience :: Information Technology',
         'License :: OSI Approved :: Apache Software License',
@@ -49,10 +56,6 @@ setup(
         'flake8'
     ],
     entry_points={
-        'flake8.extension': [
-            'MQ101 = flake8_meiqia.checks.comments:meiqia_todo_format',
-            'MQ201 = flake8_meiqia.checks.excepts:meiqia_except_format',
-            'MQ903 = flake8_meiqia.checks.other:meiqia_no_cr',
-        ]
+        'flake8.extension': flake8_ext,
     },
 )

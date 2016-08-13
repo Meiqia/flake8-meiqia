@@ -20,5 +20,5 @@ def meiqia_except_format(logical_line, noqa):
     if not m:
         return
 
-    yield (len('except'),
-           "MQ201: 'except:' is not allowed, at least use 'except Exception:'")
+    msg = "MQ201: 'except:' is not allowed, at least use 'except Exception:'"
+    yield (len('except'), msg)
