@@ -35,7 +35,7 @@ setup(
         'flake8_meiqia',
         'flake8_meiqia.checks',
     ],
-    classifier=[
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Framework :: Flake8',
