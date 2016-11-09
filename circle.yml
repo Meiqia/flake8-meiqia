@@ -6,7 +6,7 @@ dependencies:
   override:
     - pip install tox
 
-test: 
+test:
   override:
     - tox -e py27-flake8
 

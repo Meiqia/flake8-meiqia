@@ -18,6 +18,7 @@ def get_long_description():
 flake8_ext = [
     'MQ101 = flake8_meiqia.checks.comments:meiqia_todo_format',
     'MQ201 = flake8_meiqia.checks.excepts:meiqia_except_format',
+    'MQ231 = flake8_meiqia.checks.python23:meiqia_python3x_except_compatible',
     'MQ301 = flake8_meiqia.checks.code:meiqia_no_mutable_default_args',
     'MQ903 = flake8_meiqia.checks.other:meiqia_no_cr',
 ]
