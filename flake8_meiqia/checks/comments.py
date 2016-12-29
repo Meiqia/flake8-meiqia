@@ -4,6 +4,19 @@ import tokenize
 from flake8_meiqia import core
 
 
+_EMPTY_LINE_RE = re.compile("^\s*(#.*|$)")
+
+
+@core.flake8ext
+def meiqia_has_only_comments(physical_line, filename, lines, line_number):
+    """Check for empty files with only comments
+
+    MQ104: empty file with only comments
+    """
+    if line_number == 1 and all(map(_EMPTY_LINE_RE.match, lines)):
+        return 0, "MQ104: File contains nothing but comments"
+
+
 _TODO_RE = re.compile(r'''
     (?P<leading>[@\W])?
     (?P<todo>TODO|ToDo|FIXME|FixMe|XXX)
@@ -37,3 +50,22 @@ def meiqia_todo_format(physical_line, tokens):
                     err_pos = m.start('todo') + start_index[1]
 
                 return err_pos, "MQ101: Use %s(NAME)" % todo_name
+
+
+_AUTHOR_TAG_RE = (re.compile("^\s*#\s*@?(a|A)uthors?:"),
+                  re.compile("^\.\.\s+moduleauthor::"))
+
+
+@core.flake8ext
+def no_author_tags(physical_line):
+    """Checks that no author tags are used.
+
+    MQ105: Don't use author tags
+    """
+    for regex in _AUTHOR_TAG_RE:
+        if regex.match(physical_line):
+            physical_line = physical_line.lower()
+            pos = physical_line.find('moduleauthor')
+            if pos < 0:
+                pos = physical_line.find('author')
+            return pos, "MQ105: Don't use author tags"
