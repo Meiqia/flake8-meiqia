@@ -19,7 +19,7 @@ def meiqia_has_only_comments(physical_line, filename, lines, line_number):
 
 _TODO_RE = re.compile(r'''
     (?P<leading>[@\W])?
-    (?P<todo>TODO|ToDo|FIXME|FixMe|XXX)
+    (?P<todo>TODO|ToDo|todo|FIXME|FixMe|XXX)
     (?P<trailing>\()?''', re.VERBOSE)
 
 
@@ -28,6 +28,7 @@ def meiqia_todo_format(physical_line, tokens):
     """Checks for 'TODO()' in comments.
 
     Okay: # TODO(timonwong)
+    MQ101: # todo
     MQ101: # TODO
     MQ101: # TODO xxx
     MQ101: # TODO (timonwong)
