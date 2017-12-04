@@ -19,7 +19,7 @@ def meiqia_has_only_comments(physical_line, filename, lines, line_number):
 
 _TODO_RE = re.compile(r'''
     (?P<leading>[@\W])?
-    (?P<todo>TODO|ToDo|FIXME|FixMe|XXX)
+    (?P<todo>TODO|ToDo|todo|FIXME|FixMe|fixme|XXX|xxx)
     (?P<trailing>\()?''', re.VERBOSE)
 
 
